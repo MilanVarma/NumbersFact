@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <style>
+            body{
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-size: large;
+                background-color: black;
+                color: white;
+            }
+            .form{
+                height: 210px;
+                width: 500px;
+                background-color: rgb(0, 132, 255);
+                margin-left: 400px;
+                margin-top: 16px;
+            }
+            .form1{
+                text-align: center;
+            }
+            #fact{
+                padding-left: 90px;
+                padding-right: 90px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+            }
+        </style>
+    </head>
+
+    <body>
+    <div class="form">
+        <div class="form1">
+        <h1>Number Facts</h1>
+        <p>Enter a number and get a random fact</p>
+
+        <input type="number" id="fact">
+
+        <p id="factText"></p>
+        </div>
+    </div>
+
+        <script>
+            var fact = document.getElementById('fact');
+
+            fact.addEventListener('input',addFact);
+
+            function addFact()
+            {
+                var number = fact.value;
+                fetch(`http://numbersapi.com/${number}/math`)
+                .then(res => res.text())
+                .then(data => {
+                    if(number != ''){
+                    document.getElementById('factText').innerHTML = data;
+                    }
+                })
+                .catch(err => console.log(err))
+            }
+        </script>
+    </body>
+</html>
